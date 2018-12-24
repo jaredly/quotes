@@ -1,0 +1,50 @@
+/* styles */
+/* called by your view template */
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media(min-width: 500px) {
+  
+  #app {
+    width: 500px;
+    box-shadow: 0 0 10px #aaa;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  #wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+  
+}
+@media(min-height: 800px) {
+  #wrapper {
+    align-items: center;
+  }
+  
+  #app {
+    height: 800px;
+  }
+}
+

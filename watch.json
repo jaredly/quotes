@@ -1,0 +1,13 @@
+{
+  "restart": {
+    "exclude": [
+      "^public/",
+      "^dist/"
+    ],
+    "include": [
+      "^server.js",
+      "^package.json",
+      "^webpack.config.js"
+    ]
+  }
+}
