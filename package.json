@@ -1,0 +1,39 @@
+{
+  "//1": "describes your app and its dependencies",
+  "name": "thompson-quotes",
+  "version": "0.0.1",
+  "description": "A simple Node app with SQLite as a database management system, instantly up and running.",
+  "main": "server.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "@material-ui/core": "^3.6.2",
+    "jsx-loader": "^0.13.2",
+    "react": "16.7.0-alpha.2",
+    "react-dom": "16.7.0-alpha.2",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2",
+    "@material-ui/icons": "^3.0.1",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/core": "^7.2.0",
+    "babel-loader": "^8.0.4",
+    "parcel-bundler": "^1.11.0",
+    "glamor": "^2.20.40"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/thompson-quotes"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
