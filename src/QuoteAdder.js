@@ -23,7 +23,7 @@ const BInput = props => {
   );
 };
 
-const submitQuote = quote =>
+const submitEntry = quote =>
   fetch("/quotes", {
     method: "PUT",
     body: JSON.stringify(quote),
@@ -190,7 +190,11 @@ function QuoteForm({
 
       <Button
         onClick={() => {
-          onSubmit({ context, dialog, date });
+          if (mode) {
+            onSubmit({date, year, description})
+          } else {
+            onSubmit({date, year, quote})
+          }
         }}
       >
         Submit
@@ -205,7 +209,7 @@ const getId = () =>
     .toString(36)
     .slice(1);
 
-export default function QuoteAdder() {
+export default function QuoteAdder({showQuote}) {
   const [saving, setSaving] = useState(false);
   const [saveCount, setCount] = useState(0);
   return (
@@ -221,12 +225,14 @@ export default function QuoteAdder() {
         : null}
       <QuoteForm
         key={"form-" + saveCount}
-        onSubmit={quote => {
+        onSubmit={entry => {
           setSaving(true);
-          submitQuote({ ...quote, id: getId() }).then(
+          const id = getId() 
+          submitEntry({ ...entry, id }).then(
             () => {
               setSaving(false);
               setCount(saveCount + 1);
+              showQuote(id)
             },
             err => setSaving(err)
           );

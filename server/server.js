@@ -56,14 +56,16 @@ const loadQuotes = () => {
   if (!fs.existsSync(dbFile)) {
     return []
   }
-  return JSON.parse(fs.readFileSync(dbFile).toString('utf8'));
+  return fs.readFileSync(dbFile).toString('utf8').split('\n').map(line => JSON.parse(line));
 }
 
 const saveQuotes = quotes => {
   if (!quotes) {
     return false
   }
-  fs.writeFileSync(dbFile, JSON.stringify(quotes));
+  fs.writeFileSync(dbFile,
+    quotes.map(quote => JSON.stringify(quote)).join('\n')
+  );
 }
 
 const checkAdmin = (req, res, next) => {

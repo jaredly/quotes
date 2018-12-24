@@ -99,7 +99,17 @@ function Home() {
       >
         Show a random quote
       </Button>
-      <QuoteAdder />
+      <QuoteAdder showQuote={id => {
+        getQuotes().then(quotes => {
+          const byId = {};
+          quotes.forEach(q => (byId[q.id] = q));
+          setQuotes(byId);
+          if (byId[id]) {
+            setQuote(byId[id]);
+            history.pushState(null, null, "?" + id);
+          }
+        });
+      }} />
       {showQuote ? (
         <ShowQuote
           quote={showQuote}
