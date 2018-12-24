@@ -39,9 +39,21 @@ const submitQuote = quote =>
 
 const showDialog = (dialog, onChange) => {
   return (
-    <div>
+    <div style={{paddingTop: '16px'}}>
       {dialog.map((item, i) => (
-        <div key={i}>
+        <div key={i} style={{marginBottom: '16px'}}>
+          <div style={{textAlign: 'center', display: 'block'}}>
+
+            <strong >Quote line {i + 1}</strong>
+            {i !== 0 && <Button onClick={() => {
+              onChange(
+                dialog
+                  .slice(0, i)
+                  .concat(dialog.slice(i + 1))
+              )
+
+            }}>Remove</Button>}
+          </div>
           <Autocomplete
             options={people}
             value={item.speaker}
@@ -73,22 +85,66 @@ const showDialog = (dialog, onChange) => {
 
         </div>
       ))}
+      <Button  onClick={() => {
+        onChange(
+          dialog.concat([{ speaker: '', text: '' }])
+        )
+      }}>Add Speaker</Button>
     </div>
   );
 };
 
+const showDescription = (description, onChange) => {
+  return <div>
+    <BInput
+      multiline
+      fullWidth
+      value={description.text}
+      onChange={text => {
+        onChange({ ...description, text });
+      }}
+      label="Description"
+    />
+    {description.subjects.map((subject, i) => (
+      <Autocomplete key={i}
+        value={subject}
+        options={people}
+        placeholder="Subject name"
+        onChange={text => onChange({...description, subjects: description.subjects.slice(0, i).concat([text]).concat(description.subjects.slice(i + 1))})}
+      />
+    ))}
+    <Button onClick={() => onChange({...description, subjects: description.subjects.concat([''])})}
+    >
+      Add a subject
+    </Button>
+
+  </div>
+};
+
+const showQuote = (quote, onChange) => {
+  return <div>
+    <BInput
+      multiline
+      fullWidth
+      value={quote.context}
+      onChange={context => {
+        onChange({ ...quote, context });
+      }}
+      label="Context"
+    />
+    {showDialog(quote.dialog, dialog => onChange({ ...quote, dialog }))}
+  </div>
+};
+
 function QuoteForm({
   onSubmit,
-  date: origDate,
-  year: origYear,
-  quote = { dialog: [{ speaker: "", text: "" }], context: "" }
+  entry = {}
 }) {
-  const [dialog, setDialog] = useState(
-    quote.dialog || [{ speaker: "", text: "" }]
-  );
-  const [context, setContext] = useState(quote.context || "");
-  const [date, setDate] = useState(origDate || Date.now());
-  const [year, setYear] = useState(origYear || new Date().getFullYear());
+  const [mode, setMode] = useState(!!entry.description);
+  const [quote, setQuote] = useState(entry.quote || {context: '', dialog: [{speaker: '', text: ''}]});
+  const [description, setDescription] = useState(entry.description || {text: '', subjects: ['']});
+  const [date, setDate] = useState(entry.date || Date.now());
+  const [year, setYear] = useState(entry.year || new Date().getFullYear());
   return (
     <div
       className={css({
@@ -99,24 +155,38 @@ function QuoteForm({
         padding: 20
       })}
     >
-      <TextField
-        multiline
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-around',
+        marginBottom: '16px',
+      }}>
+        <Button
+          // disabled={!mode}
+          variant={mode ? 'text' : 'contained'}
+          color={mode ? 'default' : 'primary'}
         fullWidth
-        value={context}
-        onChange={evt => {
-          setContext(evt.target.value);
-        }}
-        label="Context"
-      />
-      {showDialog(dialog, setDialog)}
+          onClick={() => {
+            setMode(false)
+          }}
+        >
+          Quote
+        </Button>
 
-      <TextField
-        value={year}
-        onChange={evt => {
-          setYear(evt.target.value);
-        }}
-        label="Year"
-      />
+        <Button
+        // disabled={mode}
+          variant={mode ? 'contained' : 'text'}
+          color={mode ? 'primary' : 'default'}
+        fullWidth
+          onClick={() => {
+            setMode(true)
+          }}
+        >
+          Description
+        </Button>
+
+      </div>
+
+      {mode ? showDescription(description, setDescription) : showQuote(quote, setQuote)}
 
       <Button
         onClick={() => {
