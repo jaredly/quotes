@@ -442,7 +442,7 @@ const QuoteEdit = ({password, id}) => {
               Authentication: 'Bearer ' + password,
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify(entry)
+            body: JSON.stringify({...entry, id})
           }).then(res => {
             if (res.status === 204) {
               setSaving(false);

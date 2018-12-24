@@ -17,24 +17,30 @@ body, html {
   position: relative;
 }
 
+#wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+}
+#app {
+  flex: 1;
+}
+
 @media(min-width: 500px) {
+#wrapper {
+  justify-content: center;
+}
   
   #app {
     width: 500px;
     box-shadow: 0 0 10px #aaa;
     border-radius: 3px;
     overflow: hidden;
-  }
-
-  #wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
   }
   
 }
