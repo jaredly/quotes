@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { css } from "glamor";
 import { render } from "react-dom";
-import { ETIME } from "constants";
+import Autocomplete from './autocomplete'
+import Button from "@material-ui/core/Button";
+import people from '../private/people'
 
 /**
 Schema!
@@ -68,7 +70,8 @@ const showQuote = (quote: Quote, change) => {
     <td>
       {quote.dialog.map((line, i) => (
         <div key={i}>
-          <Binput
+          <Autocomplete
+            options={people}
             // style={{ display: "block" }}
             value={line.speaker}
             placeholder="Speaker"
@@ -181,9 +184,9 @@ const showDescription = (description: Description, change) => {
   </>
 };
 
-const showEntry = (entry: Entry, change) => {
+const showEntry = (entry: Entry, change, extra) => {
   return (
-    <>
+    <React.Fragment key={entry.id}>
     <tr key={entry.id}>
       <td>
         <Binput
@@ -204,9 +207,10 @@ const showEntry = (entry: Entry, change) => {
       </td>
       {entry.description ? showDescription(entry.description, description => change({...entry, description})) : null}
       {entry.quote ? showQuote(entry.quote, quote => change({...entry, quote})) : null}
+      {extra}
     </tr>
-    <tr><td style={{height: '20px'}}></td></tr>
-    </>
+    <tr key={entry.id + 'spacer'}><td style={{height: '20px'}}></td></tr>
+    </React.Fragment>
   );
 };
 
@@ -223,7 +227,66 @@ const showQuotes = (quotes, change) => {
         </tr>
       </thead>
       <tbody>
-        {quotes.map((data, i) => showEntry(data, data => change(quotes.slice(0, i).concat([data]).concat(quotes.slice(i + 1)))))}
+        {quotes.map((data, i) => showEntry(data, data => change(data, i)))}
+      </tbody>
+    </table>
+  );
+};
+
+const OneQuoteEditor = (props) => {
+  const [saved, setSaved] = useState(props.quote);
+  const [quote, setQuote] = useState(props.quote)
+  const [dirty, setDirty] = useState(false)
+
+  return <>
+    {showEntry(quote, quote => {
+      setQuote(quote)
+      setDirty(true)
+    }, 
+    <td>
+      {dirty ? <Button onClick={() => {
+        fetch('/quote/' + quote.id, {
+          method: 'POST',
+          headers: {
+            Authentication: 'Bearer ' + props.password,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(quote)
+        }).then(res => {
+          if (res.status === 204) {
+            setSaved(quote)
+            setDirty(false)
+          } else {
+            setQuote(saved)
+            setDirty(false)
+          }
+        })
+      }}>
+        Save
+      </Button>: null}
+      {dirty ? <Button onClick={() => {
+        setQuote(saved)
+        setDirty(false)
+      }}>
+        Cancel
+      </Button>: null}
+    </td>
+    )}
+  </>
+};
+
+const showIndividualQuotes = (password, quotes) => {
+  return (
+    <table>
+      <thead>
+        <tr>
+          {['year', 'date', 'context/description', 'dialog/subjects'].map(attr => (
+            <th key={attr}>{attr}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {quotes.map((data, i) => <OneQuoteEditor password={password} key={data.id} quote={data} />)}
       </tbody>
     </table>
   );
@@ -242,7 +305,7 @@ const View = ({ password, go }) => {
   if (quotes === "failed") {
     return "bad password";
   }
-  return showQuotes(quotes, setQuotes);
+  return showIndividualQuotes(password, quotes);
 };
 
 const getId = () =>
