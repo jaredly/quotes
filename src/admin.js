@@ -6,6 +6,8 @@ import Autocomplete from './autocomplete'
 import Button from "@material-ui/core/Button";
 import people from '../private/people'
 
+import {QuoteForm} from './QuoteAdder'
+
 /**
 Schema!
 
@@ -399,9 +401,66 @@ const Insert = ({ password, go }) => {
   );
 };
 
+const initialRoute = () => {
+  if (location.search.slice(1)) {
+    return location.search.slice(1)
+  }
+  return null
+}
+
+const useEntry = (password, id) => {
+  const [entry, setEntry] = useState(null)
+  useEffect(() => {
+    fetch('/quote/' + id, {headers: {Authentication: 'Bearer ' + password}})
+    .then(res => res.json()).then(setEntry, err => console.error('Failed to load'))
+  }, [id])
+  return entry
+}
+
+const QuoteEdit = ({password, id}) => {
+  const [saving, setSaving] = useState(false);
+  const entry = useEntry(password, id);
+  if (!entry) return "Loading..."
+  return (
+    <div style={{
+      flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
+      {saving === true
+        ? "Saving..."
+        : saving
+        ? "Failed to submit quote :( check your connection and try again."
+        : null}
+      <QuoteForm
+        entry={entry}
+        onSubmit={entry => {
+          setSaving(true);
+          fetch('/quote/' + id, {
+            method: 'POST',
+            headers: {
+              Authentication: 'Bearer ' + password,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(entry)
+          }).then(res => {
+            if (res.status === 204) {
+              setSaving(false);
+            } else {
+              setSaving('Bad status: ' + res.status)
+            }
+          }, err => {
+setSaving(err)
+          })
+        }}
+      />
+    </div>
+  );
+};
+
 const Admin = () => {
   const [password, setPassword] = useState("");
-  const [route, go] = useState(null);
+  const [route, go] = useState(initialRoute());
 
   return (
     <div>
@@ -416,7 +475,7 @@ const Admin = () => {
         <View password={password} go={go} />
       ) : route === "insert" ? (
         <Insert password={password} go={go} />
-      ) : null}
+      ) : route ? <QuoteEdit password={password} id={route} /> : null}
     </div>
   );
 };

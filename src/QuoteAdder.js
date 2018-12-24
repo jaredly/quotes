@@ -136,7 +136,7 @@ const showQuote = (quote, onChange) => {
   </div>
 };
 
-function QuoteForm({
+export function QuoteForm({
   onSubmit,
   entry = {}
 }) {

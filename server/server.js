@@ -132,6 +132,17 @@ app.get('/check', checkAuth, function(request, response) {
   response.status(204).send();
 });
 
+app.get('/quote/:id', checkAuth, function(req, res) {
+  const data = loadQuotes()
+
+  const index = data.findIndex(quote => quote.id === req.params.id)
+  if (index === -1) {
+    return res.status(400).send("unknown id");
+  }
+  
+  res.send(JSON.stringify(data[index]));
+});
+
 app.post('/quote/:id', checkAdmin, (req, res) => {
   let data = loadQuotes();
   if (!checkQuote(req.body)) {
