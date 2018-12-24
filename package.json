@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "build": "webpack",
-    "start": "env $(cat .env) PORT=61127 node server.js"
+    "start": "env $(cat .env) PORT=61127 nodemon --watch server server/server.js"
   },
   "dependencies": {
     "@babel/core": "^7.2.0",
@@ -25,6 +25,7 @@
     "flow-bin": "^0.89.0",
     "glamor": "^2.20.40",
     "match-sorter": "^2.3.0",
+    "nodemon": "^1.18.9",
     "react": "16.7.0-alpha.2",
     "react-dom": "16.7.0-alpha.2",
     "webpack": "^4.28.2",
