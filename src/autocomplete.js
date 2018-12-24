@@ -14,11 +14,11 @@ import {
 } from "./autocomplete-components";
 import TextField from "@material-ui/core/TextField";
 
-const Autocomplete = (props: {
+const Autocomplete = (props/*: {
   value: string,
   options: Array<{ name: string, id: string }>,
   onChange: (name: string) => void
-}) => {
+}*/) => {
   const [value, setValue] = useState(props.value);
   useEffect(
     () => {
@@ -74,6 +74,7 @@ const Autocomplete = (props: {
             <TextField
               {...getInputProps({
                 // isOpen,
+                fullWidth: true,
                 onFocus: openMenu,
                 onBlur,
                 label: props.placeholder
