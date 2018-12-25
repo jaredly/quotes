@@ -9,6 +9,7 @@ import images from "./images";
 export const choose = items => items[(Math.random() * items.length) | 0];
 
 const getImage = speaker => {
+  speaker = speaker && speaker.trim();
   const name = people.aliases[speaker] || speaker;
   if (images.people[name]) {
     return "/images/" + choose(images.people[name]);

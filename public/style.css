@@ -28,13 +28,14 @@ body, html {
   align-items: stretch;
 }
 #app {
-  flex: 1;
+  flex-grow: 1;
 }
 
 @media(min-width: 500px) {
-#wrapper {
-  justify-content: center;
-}
+  #wrapper {
+    flex-direction: column;
+    justify-content: center;
+  }
   
   #app {
     width: 500px;
@@ -51,6 +52,7 @@ body, html {
   
   #app {
     height: 800px;
+    flex-grow: unset;
   }
 }
 
