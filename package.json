@@ -5,7 +5,7 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config server/webpack.config.js",
     "start": "env $(cat .env) PORT=61127 nodemon --watch server server/server.js",
     "prod": "webpack && env $(cat .env) NODE_ENV=production PORT=61127 nodemon --watch server server/server.js"
   },
