@@ -4,3 +4,4 @@ node_modules
 public/bundle.js
 public/admin.js
 private
+sync.sh

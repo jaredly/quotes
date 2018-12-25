@@ -3,6 +3,8 @@
 
 // init project
 var express = require('express');
+var https = require('https');
+var http = require('http');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser')
 var app = express();
@@ -10,29 +12,29 @@ app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const webpack = require("webpack");
+if (process.env.NODE_ENV !== 'production') {
+  const webpack = require("webpack");
+  const compiler = webpack(require('./webpack.config.js'));
 
-const compiler = webpack(require('./webpack.config.js'));
+  const watching = compiler.watch({
+    // Example watchOptions
+    aggregateTimeout: 300,
+    poll: undefined
+  }, (err, stats) => {
+    // Print watch/build result here...
+    // console.log(stats);
+    console.log('Rebuild')
+    if (err) {
+      console.log('Error')
+      console.error(err)
+    }
+    if (stats.errors) {
+      stats.errors.forEach(e => console.error(e))
+    }
+  });
+}
 
-const watching = compiler.watch({
-  // Example watchOptions
-  aggregateTimeout: 300,
-  poll: undefined
-}, (err, stats) => {
-  // Print watch/build result here...
-  // console.log(stats);
-  console.log('Rebuild')
-  if (err) {
-    console.log('Error')
-    console.error(err)
-  }
-  if (stats.errors) {
-    stats.errors.forEach(e => console.error(e))
-  }
-});
 
-
-// init sqlite db
 var fs = require('fs');
 var dbFile = './.data/quotes.json';
 
@@ -192,7 +194,14 @@ app.put('/quotes', checkAuth, function(req, res) {
 
 app.use(checkAuth, express.static('private'));
 
-// listen for requests :)
-var listener = app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
-});
+const listener = http.createServer(app).listen(process.env.PORT);
+if (process.env.HTTPS_PORT) {
+  https.createServer({
+    key: fs.readFileSync(process.env.KEY_FILE),
+    cert: fs.readFileSync(process.env.CERT_FILE)
+  }, app).listen(process.env.HTTPS_PORT);
+}
+console.log('Your app is listening on port ' + listener.address().port);
+
+// app.listen(process.env.PORT, function() {
+// });
