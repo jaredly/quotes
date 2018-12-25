@@ -23,6 +23,8 @@ function Login({ onLogin }) {
     <div className={css({ padding: 20 })}>
       <TextField
         autoFocus
+        autocorrect="off"
+        autocapitalize="none"
         error={error}
         value={value}
         onChange={evt => {
