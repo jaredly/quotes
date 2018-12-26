@@ -202,8 +202,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.959798"
-     inkscape:cx="437.78085"
-     inkscape:cy="954.78534"
+     inkscape:cx="379.94391"
+     inkscape:cy="904.27771"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -244,17 +244,6 @@
          y="41.015621"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Copperplate;-inkscape-font-specification:'Copperplate Bold';stroke-width:0.26458332">“</tspan></text>
     <text
-       id="text827"
-       y="70.011002"
-       x="75.038651"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:20.75257874px;line-height:1.25;font-family:'Brush Script MT';-inkscape-font-specification:'Brush Script MT';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.51881444"
-       xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, ';stroke-width:0.51881444"
-         y="70.011002"
-         x="75.038651"
-         id="tspan825"
-         sodipodi:role="line">“</tspan></text>
-    <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Brush Script MT';-inkscape-font-specification:'Brush Script MT';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="76.918152"
@@ -277,18 +266,21 @@
          id="tspan833"
          sodipodi:role="line">“</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 76.729167,53.583333 h 15.875 V 58.875 H 87.3125 V 69.458333 H 82.020833 V 58.875 h -5.291666 z"
+       style="fill:#0079e2;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 78.052083,56.229167 h 14.552084 v 3.96875 H 87.3125 v 9.260416 l -3.96875,0 -10e-7,-9.260416 h -5.291666 z"
        id="path837"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccc" />
     <rect
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect839"
        width="21.166664"
        height="21.166666"
        x="74.083336"
-       y="50.9375" />
+       y="50.9375"
+       inkscape:export-filename="/Users/jared/clone/apps/quotes/public/ticon.png"
+       inkscape:export-xdpi="86.400002"
+       inkscape:export-ydpi="86.400002" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -337,5 +329,49 @@
          x="123.52074"
          y="41.626167"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, ';stroke-width:0.36265188">“</tspan></text>
+    <text
+       id="text827"
+       y="63.198826"
+       x="75.129456"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.88313007px;line-height:1.25;font-family:'Brush Script MT';-inkscape-font-specification:'Brush Script MT';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.37207824"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, ';stroke-width:0.37207824"
+         y="63.198826"
+         x="75.129456"
+         id="tspan825"
+         sodipodi:role="line">“</tspan></text>
+    <path
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:connector-curvature="0"
+       id="path99368"
+       d="m 101.86459,57.552084 h 18.52083 l 0,5.291666 h -6.61459 v 13.229167 h -5.29166 V 62.84375 h -6.61459 z"
+       style="fill:#49aaff;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/Users/jared/clone/apps/quotes/public/ticon_72.png"
+       inkscape:export-xdpi="86.400002"
+       inkscape:export-ydpi="86.400002" />
+    <rect
+       y="56.229168"
+       x="100.54167"
+       height="21.166666"
+       width="21.166664"
+       id="rect99370"
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="/Users/jared/clone/apps/quotes/public/ticon_72.png"
+       inkscape:export-xdpi="86.400002"
+       inkscape:export-ydpi="86.400002" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.88313007px;line-height:1.25;font-family:'Brush Script MT';-inkscape-font-specification:'Brush Script MT';letter-spacing:0px;word-spacing:0px;fill:#000216;fill-opacity:1;stroke:none;stroke-width:0.37207824"
+       x="101.45415"
+       y="68.156403"
+       id="text99374"
+       inkscape:export-filename="/Users/jared/clone/apps/quotes/public/ticon_72.png"
+       inkscape:export-xdpi="86.400002"
+       inkscape:export-ydpi="86.400002"><tspan
+         sodipodi:role="line"
+         id="tspan99372"
+         x="101.45415"
+         y="68.156403"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, ';fill:#000216;fill-opacity:1;stroke-width:0.37207824">“</tspan></text>
   </g>
 </svg>
