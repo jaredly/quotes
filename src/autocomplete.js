@@ -12,7 +12,7 @@ import {
   css,
   getStringItems
 } from "./autocomplete-components";
-import TextField from "@material-ui/core/TextField";
+import TextField from "./TextField";
 
 const Autocomplete = (props/*: {
   value: string,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import Button from "./Button";
+import TextField from "./TextField";
 import { css } from "glamor";
 import Autocomplete from "./autocomplete";
 import people from "../private/people";
@@ -113,7 +113,7 @@ const showDescription = (description, onChange) => {
         onChange={text => onChange({...description, subjects: description.subjects.slice(0, i).concat([text]).concat(description.subjects.slice(i + 1))})}
       />
     ))}
-    <Button onClick={() => onChange({...description, subjects: description.subjects.concat([''])})}
+    <Button style={{marginTop: '16px'}} onClick={() => onChange({...description, subjects: description.subjects.concat([''])})}
     >
       Add a subject
     </Button>
@@ -164,7 +164,7 @@ export function QuoteForm({
           // disabled={!mode}
           variant={mode ? 'text' : 'contained'}
           color={mode ? 'default' : 'primary'}
-        fullWidth
+          fullWidth
           onClick={() => {
             setMode(false)
           }}

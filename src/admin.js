@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { css } from "glamor";
 import { render } from "react-dom";
 import Autocomplete from './autocomplete'
-import Button from "@material-ui/core/Button";
+import Button from "./Button";
 import people from '../private/people'
 
 import {QuoteForm} from './QuoteAdder'

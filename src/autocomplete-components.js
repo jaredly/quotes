@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {forwardRef} from 'react'
 import {css} from 'glamor'
 import matchSorter from 'match-sorter'
 
@@ -81,7 +81,7 @@ const Label = ({props}) => <label className={css({
   marginBottom: 10,
 })} {...props} />
 
-const BaseMenu = React.forwardRef(({isOpen, ...props}, ref) => <ul ref={ref} className={css(
+const BaseMenu = forwardRef(({isOpen, ...props}, ref) => <ul ref={ref} className={css(
   {
     padding: 0,
     marginTop: 0,
@@ -109,7 +109,7 @@ const BaseMenu = React.forwardRef(({isOpen, ...props}, ref) => <ul ref={ref} cla
   />)
 
 
-const Menu = React.forwardRef((props, ref) => (
+const Menu = forwardRef((props, ref) => (
   <BaseMenu ref={ref} {...props} />
 ))
 
