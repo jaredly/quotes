@@ -1,13 +1,22 @@
 import React from 'react'
-import {css as emoCSS} from 'emotion'
-import styled from '@emotion/styled'
+import {css} from 'glamor'
 import matchSorter from 'match-sorter'
 
-const css = (...args) => ({className: emoCSS(...args)})
-
-
-const Item = styled('li')(
-  {
+const Item = ({isActive, isSelected, children, ...props}) => {
+  let style = null
+  if (isActive) {
+    style = {
+      color: 'rgba(0,0,0,.95)',
+      background: 'rgba(0,0,0,.03)',
+    }
+  }
+  if (isSelected) {
+    style = {
+      color: 'rgba(0,0,0,.95)',
+      fontWeight: '700',
+    }
+  }
+  return <li {...props} style={style} className={css({
     position: 'relative',
     cursor: 'pointer',
     display: 'block',
@@ -24,27 +33,16 @@ const Item = styled('li')(
     padding: '.8rem 1.1rem',
     whiteSpace: 'normal',
     wordWrap: 'normal',
-  },
-  ({isActive, isSelected}) => {
-    const styles = []
-    if (isActive) {
-      styles.push({
-        color: 'rgba(0,0,0,.95)',
-        background: 'rgba(0,0,0,.03)',
-      })
-    }
-    if (isSelected) {
-      styles.push({
-        color: 'rgba(0,0,0,.95)',
-        fontWeight: '700',
-      })
-    }
-    return styles
-  },
-)
+  })}>
+    {children}
+  </li>
+}
+
 const onAttention = '&:hover, &:focus'
-const Input = styled('input')(
-  {
+
+const Input = ({iOpen, ...props}) => {
+  return <input
+  className={css({
     width: '100%', // full width - icon width/2 - border
     fontSize: 14,
     wordWrap: 'break-word',
@@ -64,9 +62,8 @@ const Input = styled('input')(
       borderColor: '#96c8da',
       boxShadow: '0 2px 3px 0 rgba(34,36,38,.15)',
     },
-  },
-  ({isOpen}) =>
-    isOpen
+  })}
+    style={isOpen
       ? {
           borderBottomLeftRadius: '0',
           borderBottomRightRadius: '0',
@@ -74,16 +71,17 @@ const Input = styled('input')(
             boxShadow: 'none',
           },
         }
-      : null,
-)
+      : null}
+  />
+}
 
-const Label = styled('label')({
+const Label = ({props}) => <label className={css({
   fontWeight: 'bold',
   display: 'block',
   marginBottom: 10,
-})
+})} {...props} />
 
-const BaseMenu = styled('ul')(
+const BaseMenu = React.forwardRef(({isOpen, ...props}, ref) => <ul ref={ref} className={css(
   {
     padding: 0,
     marginTop: 0,
@@ -103,17 +101,19 @@ const BaseMenu = styled('ul')(
     borderBottomWidth: 1,
     borderLeftWidth: 1,
     borderStyle: 'solid',
-  },
-  ({isOpen}) => ({
+  })}
+  style={{
     border: isOpen ? null : 'none',
-  }),
-)
+  }}
+  {...props}
+  />)
+
 
 const Menu = React.forwardRef((props, ref) => (
   <BaseMenu ref={ref} {...props} />
 ))
 
-const ControllerButton = styled('button')({
+const ControllerButton = (props) => <button className={css({
   backgroundColor: 'transparent',
   border: 'none',
   position: 'absolute',
@@ -126,7 +126,7 @@ const ControllerButton = styled('button')({
   height: '100%',
   justifyContent: 'center',
   alignItems: 'center',
-})
+})} {...props} />
 
 function ArrowIcon({isOpen}) {
   return (
